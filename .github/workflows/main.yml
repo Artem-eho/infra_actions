@@ -47,7 +47,7 @@ jobs:
         uses: docker/build-push-action@v2 
         with:
           push: true
-          tags: artemeho/api_yamdb:latest 
+          tags: artemeho/infra_actions:latest 
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
@@ -59,6 +59,6 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          sudo docker pull artemeho/api_yamdb:latest
+          sudo docker pull artemeho/infra_actions:latest
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 artemeho/api_yamdb:latest
+          sudo docker run --rm -d -p 5000:5000 artemeho/infra_actions:latest
